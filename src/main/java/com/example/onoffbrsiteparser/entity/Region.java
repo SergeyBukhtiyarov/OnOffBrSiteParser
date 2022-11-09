@@ -13,12 +13,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @Entity
-@XmlRootElement(name = "id")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Region {
     @JsonAlias("$id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int m_Item1;
     private String m_Item2;
