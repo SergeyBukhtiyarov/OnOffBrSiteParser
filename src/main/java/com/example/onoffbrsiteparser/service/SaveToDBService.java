@@ -1,6 +1,6 @@
 package com.example.onoffbrsiteparser.service;
 
-import com.example.onoffbrsiteparser.entity.OnOffDaily;
+//import com.example.onoffbrsiteparser.entity.OnOffDaily;
 import com.example.onoffbrsiteparser.entity.OnOffHourly;
 import com.example.onoffbrsiteparser.entity.Region;
 import com.example.onoffbrsiteparser.repository.OnOffHourlyRepository;
@@ -20,10 +20,15 @@ public class SaveToDBService {
 
 
 
-    public void save(OnOffDaily onOffDaily) {
-        for (OnOffHourly onOffHourly: onOffDaily.getOnOffHourlyList()) {
-            onOffHourlyRepository.save(onOffHourly);
-        }
+//    public void save(OnOffDaily onOffDaily) {
+//        for (OnOffHourly onOffHourly: onOffDaily.getOnOffHourlyList()) {
+//            onOffHourlyRepository.save(onOffHourly);
+//        }
+//    }
+
+    public void save(List<OnOffHourly> onOffHourly) {
+            onOffHourlyRepository.saveAll(onOffHourly);
+
     }
 
     public  void saveRegion(List<Region> regions){

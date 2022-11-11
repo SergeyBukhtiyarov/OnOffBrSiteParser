@@ -1,15 +1,17 @@
 package com.example.onoffbrsiteparser;
 
-import com.example.onoffbrsiteparser.entity.OnOffDaily;
+//import com.example.onoffbrsiteparser.entity.OnOffDaily;
+
+import com.example.onoffbrsiteparser.entity.OnOffHourly;
 import com.example.onoffbrsiteparser.entity.Region;
-import com.example.onoffbrsiteparser.service.*;
-import org.jsoup.Connection;
+import com.example.onoffbrsiteparser.service.OnOffLoaderService;
+import com.example.onoffbrsiteparser.service.RegionLoaderService;
+import com.example.onoffbrsiteparser.service.SaveToDBService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.xml.bind.JAXBException;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,13 +20,7 @@ public class JsoupParser {
 
 
     @Autowired
-    OnOffJsoupLoaderService onOffLoaderService;
-    @Autowired
-    TempFileService tempFileService;
-
-    @Autowired
-    OnOffJAXBParserXMLtoJavaObject onOffJAXBParserXMLtoJavaObject;
-
+    OnOffLoaderService onOffLoaderService;
     @Autowired
     SaveToDBService saveToDBService;
 
@@ -37,10 +33,9 @@ public class JsoupParser {
         String date = "2022.01.10";
         int region = 36;
 
-        Connection.Response response = onOffLoaderService.loadXMLFromBrSite(date, region);
-        File file = tempFileService.createTempFile(response);
-        OnOffDaily onOffDaily = onOffJAXBParserXMLtoJavaObject.parse(file);
-        saveToDBService.save(onOffDaily);
+
+        List<OnOffHourly> onOffHourlyList = onOffLoaderService.loadOnOff();
+        saveToDBService.save(onOffHourlyList);
         List<Region> regions = regionLoaderService.loadRegions();
         saveToDBService.saveRegion(regions);
 

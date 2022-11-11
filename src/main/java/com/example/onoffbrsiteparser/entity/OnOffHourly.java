@@ -1,5 +1,7 @@
 package com.example.onoffbrsiteparser.entity;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -19,6 +21,7 @@ public class OnOffHourly {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private long id;
 
     private long sub_rf_id;

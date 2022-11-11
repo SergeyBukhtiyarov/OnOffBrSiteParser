@@ -11,4 +11,4 @@ mac: download Postgres.App
    \dt  -> list of all tables in selected db
 
 =========================================================================================
-
+- get and parse JSON( WebClient/ObjectMapper)
